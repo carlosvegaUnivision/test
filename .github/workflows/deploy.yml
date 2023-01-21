@@ -1,18 +1,8 @@
-name: Deploy
-
-on:
-  workflow_run:
-    branches:
-    - '**'
-    tags:
-    - '**'
-    types:
-      - completed
+name: hello-world
+on: push
 jobs:
-  build:
+  my-job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Hello World
-        run: echo Hello, world!
+      - name: my-step
+        run: echo "Hello World!"
