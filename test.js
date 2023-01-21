@@ -1,2 +1,2 @@
 const test=1;
-const a = (h, n) => h.reduce((prev, curr)=> el*n, 0);
+const a = (h, n, s) => h.reduce((prev, curr)=> el*n, s);
