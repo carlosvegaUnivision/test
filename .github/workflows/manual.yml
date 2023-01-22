@@ -44,6 +44,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          token: ${{ secrets.GH_TOKEN }}
         env:
             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - run: |
