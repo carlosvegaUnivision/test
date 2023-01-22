@@ -45,11 +45,6 @@ jobs:
       with:
         node-version: '18.x'
     - name: Send greeting
-      run: | 
-          echo "Hello ${{ github.event.inputs.name }}"
-          echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
-          echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
-          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
-          npx semantic-release
+      run: npx semantic-release
         with:
 +          token: ${{ secrets.GH_TOKEN }}
