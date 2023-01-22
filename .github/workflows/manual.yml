@@ -46,7 +46,7 @@ jobs:
         node-version: '18.x'
     - name: Send greeting
       env:
-        token: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: | 
           echo "Hello ${{ github.event.inputs.name }}"
           echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
