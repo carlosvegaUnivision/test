@@ -44,11 +44,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - run: |
           echo "Hello ${{ github.event.inputs.name }}"
           echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
           echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
           echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
+          echo "aaa is ${{ secrets.GH_TOKEN }}"
+          echo "aaaaa d ${GITHUB_TOKEN}"
       - run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
