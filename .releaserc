@@ -1,8 +1,32 @@
 {
     "branches": ["main"],
+    "repositoryUrl": "https://github.com/carlosvegaUnivision/test",
+    "debug": "false",
     "plugins": [
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
-        "@semantic-release/github"
+        [
+            "@semantic-release/changelog",
+            {
+            "changelogFile": "CHANGELOG.md",
+            "changelogTitle": "# Semantic Versioning Changelog"
+            }
+        ],
+        [
+            "@semantic-release/github",
+            {
+            "assets": ["CHANGELOG.md"]
+            }
+        ],
+        [
+            "@semantic-release/github",
+            {
+            "assets": [
+                {
+                "path": "release/**"
+                }
+            ]
+            }
+        ]
     ]
 }
