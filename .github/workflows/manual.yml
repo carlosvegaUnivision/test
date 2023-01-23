@@ -54,4 +54,4 @@ jobs:
           echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
           echo "aaa is ${{ secrets.GH_TOKEN }}"
           echo "aaaaa d ${GITHUB_TOKEN}"
-      - run: npx semantic-release
+      - run: GITHUB_TOKEN=${{ secrets.GH_TOKEN }} npx semantic-release
