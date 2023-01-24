@@ -10,12 +10,40 @@
         {
             "replacements": [
             {
-                "files": ["test/health-response.json", "src/controllers/health/index.spec.ts"],
+                "files": ["test/health-response.json"],
                 "from": "\"version\": \".*\"",
                 "to": "\"version\": \"${nextRelease.version}\"",
                 "results": [
                 {
                     "file": "test/health-response.json",
+                    "hasChanged": true,
+                    "numMatches": 1,
+                    "numReplacements": 1
+                }
+                ],
+                "countMatches": true
+            },
+            {
+                "files": ["src/controllers/health/index.spec.ts"],
+                "from": "version: \".*\"",
+                "to": "version: \"${nextRelease.version}\"",
+                "results": [
+                {
+                    "file": "src/controllers/health/index.spec.ts",
+                    "hasChanged": true,
+                    "numMatches": 1,
+                    "numReplacements": 1
+                }
+                ],
+                "countMatches": true
+            },
+            {
+                "files": ["src/plugins/swagger/index.ts"],
+                "from": "version: '.*'",
+                "to": "version: '${nextRelease.version}'",
+                "results": [
+                {
+                    "file": "src/plugins/swagger/index.ts",
                     "hasChanged": true,
                     "numMatches": 1,
                     "numReplacements": 1
