@@ -2,8 +2,30 @@
     "branches": ["main"],
     "repositoryUrl": "https://github.com/carlosvegaUnivision/test",
     "debug": "false",
+    "tagFormat": "${version}",
     "plugins": [
         "@semantic-release/commit-analyzer",
+        [
+        "@google/semantic-release-replace-plugin",
+        {
+            "replacements": [
+            {
+                "files": ["test/health-response.json"],
+                "from": "\"version\": \".*\"",
+                "to": "\"version\": \"${nextRelease.version}\"",
+                "results": [
+                {
+                    "file": "test/health-response.json",
+                    "hasChanged": true,
+                    "numMatches": 1,
+                    "numReplacements": 1
+                }
+                ],
+                "countMatches": true
+            }
+            ]
+        }
+        ],
         "@semantic-release/release-notes-generator",
         [
             "@semantic-release/changelog",
@@ -25,5 +47,8 @@
                 ]
             }
         ]
-    ]
+    ],
+    "scripts": {
+        "postversion": "cp -r package.json .. && cp -r npm-shrinkwrap.json .."
+    }
 }
