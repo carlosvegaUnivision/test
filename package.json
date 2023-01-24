@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "some repo with version",
   "main": "test.js",
   "private": true,
