@@ -1,5 +1,13 @@
 # content-search-api ChangeLog
 
+## [1.4.3](https://github.com/carlosvegaUnivision/test/compare/1.4.2...1.4.3) (2023-01-24)
+
+
+### Performance Improvements
+
+* improve speed x2 ([bc629e3](https://github.com/carlosvegaUnivision/test/commit/bc629e368621eefd3032dab1036b433b29826c7d))
+* improve speed x2 ([7ae7034](https://github.com/carlosvegaUnivision/test/commit/7ae7034cb215ad41becb115ef2866ae4ffb52ab0))
+
 ## [1.4.2](https://github.com/carlosvegaUnivision/test/compare/1.4.1...1.4.2) (2023-01-24)
 
 
