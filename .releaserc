@@ -9,7 +9,7 @@
             "@semantic-release/changelog",
             {
             "changelogFile": "CHANGELOG.md",
-            "changelogTitle": "# Semantic Versioning Changelog"
+            "changelogTitle": "# content-search-api ChangeLog"
             }
         ],
         ["@semantic-release/npm", {
