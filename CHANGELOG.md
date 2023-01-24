@@ -1,5 +1,18 @@
 # content-search-api ChangeLog
 
+## [1.4.2](https://github.com/carlosvegaUnivision/test/compare/1.4.1...1.4.2) (2023-01-24)
+
+
+### Bug Fixes
+
+* release ([570b97a](https://github.com/carlosvegaUnivision/test/commit/570b97ae8de794ec063bf670fd923542787f3353))
+* release ([bec4cad](https://github.com/carlosvegaUnivision/test/commit/bec4cade302b1f3451610f39109f5353f71a941a))
+
+
+### Performance Improvements
+
+* improve speed x2 ([e7af334](https://github.com/carlosvegaUnivision/test/commit/e7af3344a3ecac67fc73dffa28d2f1b8674100bb))
+
 ## [1.4.1](https://github.com/carlosvegaUnivision/test/compare/v1.4.0...1.4.1) (2023-01-24)
 
 
