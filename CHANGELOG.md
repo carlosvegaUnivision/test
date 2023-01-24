@@ -1,5 +1,12 @@
 # content-search-api ChangeLog
 
+## [1.4.1](https://github.com/carlosvegaUnivision/test/compare/v1.4.0...1.4.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* release ([cc35278](https://github.com/carlosvegaUnivision/test/commit/cc35278a146ac76072dafaeb454e60e071164057))
+
 # [1.4.0](https://github.com/carlosvegaUnivision/test/compare/v1.3.0...v1.4.0) (2023-01-24)
 
 
