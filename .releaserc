@@ -10,7 +10,7 @@
         {
             "replacements": [
             {
-                "files": ["test/health-response.json"],
+                "files": ["test/health-response.json", "src/controllers/health/index.spec.ts"],
                 "from": "\"version\": \".*\"",
                 "to": "\"version\": \"${nextRelease.version}\"",
                 "results": [
@@ -43,7 +43,8 @@
                 "assets": [
                     "package.json",
                     "CHANGELOG.md",
-                    "test/health-response.json"
+                    "test/health-response.json",
+                    "src/controllers/health/index.spec.ts"
                 ]
             }
         ]
