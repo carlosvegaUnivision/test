@@ -41,6 +41,6 @@ jobs:
           echo "From ${{ github.event.inputs.from }}"
           echo "Version is ${{ github.event.inputs.version }}"
           echo "To is ${{ github.event.inputs.to }}"
-          echo git describe --tags
+          git describe --tags
           echo "Message is ${{ github.event.inputs.message }}"
 
