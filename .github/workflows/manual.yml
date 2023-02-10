@@ -1,58 +1,45 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Promote to Upper Environment
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
     inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
-      environment:
-        type: environment
-        description: Select the environment
-      boolean:
-        type: boolean
-        description: True or False
-      choice:
+      from:
         type: choice
-        description: Make a choice
+        required: true
+        description: 'From: '
+        default: 'Dev'
         options:
-        - foo
-        - bar
-        - baz
+        - Dev
+        - QA
+        - STG
+      version:
+        description: 'Version:'
+        default: ''
+        required: true
+      to:
+        type: choice
+        required: true
+        description: 'To: '
+        default: 'QA'
+        options:
+        - QA
+        - STG
+        - PROD
+      message:
+        description: 'Message:'
+        default: 'chore(release): ...'
+        required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
+  promote:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          token: ${{ secrets.GH_TOKEN }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - run: |
-          echo "Hello ${{ github.event.inputs.name }}"
-          echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
-          echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
-          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
-      - run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: "Promote to Upper Environment"
+        run: |
+          echo "From ${{ github.event.inputs.from }}"
+          echo "Version is ${{ github.event.inputs.version }}"
+          echo "boolean is ${{ github.event.inputs.to }}"
+          echo "choice is ${{ github.event.inputs.message }}"
+
