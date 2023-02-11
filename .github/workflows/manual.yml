@@ -48,7 +48,7 @@ jobs:
           git config --global user.name "Carlos Vega"
           git pull
           git fetch --tags
-          from_tag=$([[ ${{github.event.inputs.from}} = DEV ]] && echo ${{github.event.inputs.version}}-dev || echo ${{github.event.inputs.version}}-beta)
+          from_tag=$([[ ${{github.event.inputs.from}} = DEV ]] && echo v${{github.event.inputs.version}} || echo ${{github.event.inputs.version}}-beta)
           to_tag=$([[ ${{github.event.inputs.to}} = QA ]] && echo ${{github.event.inputs.version}}-beta || echo ${{github.event.inputs.version}}-rc)
           git checkout tags/$from_tag
           git commit --allow-empty --allow-empty-message -m ""
