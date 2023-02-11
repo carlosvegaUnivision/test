@@ -9,9 +9,9 @@ on:
         type: choice
         required: true
         description: 'From: '
-        default: 'Dev'
+        default: 'DEV'
         options:
-        - Dev
+        - DEV
         - QA
         - STG
       version:
@@ -48,13 +48,10 @@ jobs:
           git config --global user.name "Carlos Vega"
           git pull
           git fetch --tags
-          git checkout tags/v1.3.0
-          git commit --allow-empty --allow-empty-message -m "dddd"
-          git tag -a 1.3.0-beta -m "dddd"
-          git push origin 1.3.0-beta
-          echo "From ${{ github.event.inputs.from }}"
-          echo "Version is ${{ github.event.inputs.version }}"
-          echo "To is ${{ github.event.inputs.to }}"
-          git describe --tags
-          echo "Message is ${{ github.event.inputs.message }}"
+          from_tag=$([[ github.event.inputs.from = DEV ]] && echo github.event.inputs.version-dev || echo github.event.inputs.version-beta)
+          to_tag=$([[ github.event.inputs.to = QA ]] && echo github.event.inputs.version-beta || echo github.event.inputs.version-rc)
+          git checkout tags/$from_tag
+          git commit --allow-empty --allow-empty-message -m ""
+          git tag -a $to_tag -m "${{ github.event.inputs.message }}"
+          git push origin $to_tag
 
