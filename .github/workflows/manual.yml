@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v2
       - name: "Promote to Upper Environment"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.email "u1200112@unimilitar.edu.co"
           git config --global user.name "Carlos Vega"
