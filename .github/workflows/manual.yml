@@ -38,8 +38,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: "Promote to Upper Environment"
         run: |
           git config --global user.email "u1200112@unimilitar.edu.co"
