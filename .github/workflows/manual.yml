@@ -47,7 +47,7 @@ jobs:
           git pull
           git fetch --tags
           git checkout tags/v1.3.0
-          git commit --allow-empty --allow-empty-message
+          git commit --allow-empty --allow-empty-message -m "dddd"
           git tag -a 1.3.0-beta -m "dddd"
           git push origin 1.3.0-beta
           echo "From ${{ github.event.inputs.from }}"
