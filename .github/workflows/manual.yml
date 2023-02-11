@@ -39,7 +39,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GHG_TOKEN }}
       - name: "Promote to Upper Environment"
         run: |
           git config --global user.email "u1200112@unimilitar.edu.co"
