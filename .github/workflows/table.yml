@@ -1,34 +1,29 @@
-# This is a basic workflow that is manually triggered
+name: Step Summary
 
-name: Table
-
-on:
-  workflow_dispatch:
-    inputs:
-      from_version:
-        description: 'From Version Tag:'
-        default: ''
-        required: true
-      to_version:
-        description: 'To Version Tag:'
-        default: ''
-        required: true
-      message:
-        description: 'Message:'
-        default: 'chore(release): ...'
-        required: true
+on: [push]
 
 jobs:
-  promote:
+  step-summary:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
+      - name: Step 1
+        run: echo "Step 1 completed"
+      - name: Step 2
+        run: echo "Step 2 completed"
+      - name: Step 3
+        run: echo "Step 3 completed"
+      - name: Step Summary
+        uses: actions/github-script@v4
+        id: summary
         with:
-          token: ${{ secrets.WORKFLOW_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: "Promote to Upper Environment"
-        run: |
-          run: echo '### Hello world! ' >> $GITHUB_STEP_SUMMARY
-
+          script: |
+            const summary = {
+              steps: [
+                { name: 'Step 1', completed: true },
+                { name: 'Step 2', completed: true },
+                { name: 'Step 3', completed: true },
+              ]
+            };
+            console.log(JSON.stringify(summary));
+      - name: Display Summary
+        run: echo "${{ steps.summary.outputs.result }}"
