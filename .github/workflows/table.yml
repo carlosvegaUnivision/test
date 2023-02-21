@@ -18,4 +18,7 @@ jobs:
     - name: Add Dependencies
       run: npm i async newman axios
     - name: Generate Job Summary
-      run: echo "| 🍎 Fruit | 🍭 Sugar Content (grams) |\n| --- | --- |\n| Apple | 10 |\n| Banana | 14 |\n| Orange | 12 |\n| Pineapple | 16 |\n| Grapes | 16 |" >> $GITHUB_STEP_SUMMARY
+      run: |
+        SUMMARY=$'# Testing Job Summary\n## Second Level Heading\nHello GitHub'
+        echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+      #run: echo "| 🍎 Fruit | 🍭 Sugar Content (grams) |\n| --- | --- |\n| Apple | 10 |\n| Banana | 14 |\n| Orange | 12 |\n| Pineapple | 16 |\n| Grapes | 16 |" >> $GITHUB_STEP_SUMMARY
