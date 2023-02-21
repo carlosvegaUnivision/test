@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Promote to Upper Environment
+name: Table
 
 on:
   workflow_dispatch:
@@ -30,12 +30,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: "Promote to Upper Environment"
         run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git pull
-          git fetch --tags
-          git checkout tags/${{github.event.inputs.from_version}}
-          git commit --allow-empty --allow-empty-message -m ""
-          git tag -a ${{github.event.inputs.to_version}} -m "${{ github.event.inputs.message }}"
-          git push origin ${{github.event.inputs.to_version}}
+          run: echo '### Hello world! ' >> $GITHUB_STEP_SUMMARY
 
