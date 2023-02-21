@@ -19,7 +19,7 @@ jobs:
       - name: Add Dependencies
         run: npm i async newman axios
       - name: Add comment
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         env:
           POSTMAN: ${{ secrets.POSTMAN }}
         with:
