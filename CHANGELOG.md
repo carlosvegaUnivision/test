@@ -1,4 +1,4 @@
-# content-search-api ChangeLog
+# content-search-api ChangeLog.
 
 ## [1.4.3](https://github.com/carlosvegaUnivision/test/compare/1.4.2...1.4.3) (2023-01-24)
 
