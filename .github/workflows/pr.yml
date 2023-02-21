@@ -28,7 +28,7 @@ jobs:
 
             const request = axios.create({
                 headers: {
-                  'X-Api-Key' : process.env.POSTMAN,
+                  'X-Api-Key' : process.env.secrets.POSTMAN,
                   'Content-Type': 'application/json'
                   }
                 }
