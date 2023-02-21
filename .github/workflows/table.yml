@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Generate Job Summary
-      uses: actions/github-script@v4
-      id: summary
+    - name: Install Node.js
+      uses: actions/setup-node@v2.4.0
       with:
-        script: |
-          const jobs = [{name: 'carlos', status: 'green'}, {name: 'andres', status: 'red'}];
-          const summary = jobs.map(job => ({name: job.name, status: job.status}));
-          console.log(JSON.stringify(summary));
-    - name: Display Job Summary
-      run: echo "${{ steps.summary.outputs.result }}" >> $GITHUB_STEP_SUMMARY
+        node-version: '18.x'
+    - name: Create main script
+      run: npm init -y
+    - name: Add Dependencies
+      run: npm i async newman axios
+    - name: Generate Job Summary
+      run: echo "| 🍎 Fruit | 🍭 Sugar Content (grams) |\n| --- | --- |\n| Apple | 10 |\n| Banana | 14 |\n| Orange | 12 |\n| Pineapple | 16 |\n| Grapes | 16 |" >> $GITHUB_STEP_SUMMARY
