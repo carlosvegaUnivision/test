@@ -18,11 +18,10 @@ jobs:
         run: npm init -y
       - name: Add Dependencies
         run: npm i async newman axios
-      - name: Set Postman env variable
-        env:
-          POSTMAN: ${{ secrets.POSTMAN }}
       - name: Add comment
         uses: actions/github-script@v4
+        env:
+          POSTMAN: ${{ secrets.POSTMAN }}
         with:
           script: |
             const async = require('async')
