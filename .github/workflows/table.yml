@@ -17,4 +17,5 @@ jobs:
           const jobs = [{name: 'carlos', status: 'green'}, {name: 'andres', status: 'red'}];
           const summary = jobs.map(job => ({name: job.name, status: job.status}));
           console.log(JSON.stringify(summary));
+    - name: Display Job Summary
       run: echo "${{ steps.summary.outputs.result }}" >> $GITHUB_STEP_SUMMARY
