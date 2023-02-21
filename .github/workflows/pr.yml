@@ -1,0 +1,24 @@
+name: Add comment to pull request
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Add comment
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const payload = {
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
+              issue_number: context.payload.pull_request.number,
+              body: 'Hello, world!'
+            }
+            return github.issues.createComment(payload)
+          github-token: ${{ secrets.GITHUB_TOKEN }}
