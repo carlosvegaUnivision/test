@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Write to workflow job summary
-      run: |
-        SUMMARY=$'# Testing Job Summary\n## Second Level Heading\nHello GitHub'
-        echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+    - name: Generate Job Summary
+      uses: actions/github-script@v4
+      id: summary
+      with:
+        script: |
+          const jobs = ${{ toJson(needs) }};
+          const summary = jobs.map(job => ({name: job.name, status: job.status}));
+          console.log(JSON.stringify(summary));
+    - name: Display Job Summary
+      run: echo "${{ steps.summary.outputs.result }}" >> $GITHUB_STEP_SUMMARY
