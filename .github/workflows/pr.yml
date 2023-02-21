@@ -67,13 +67,13 @@ jobs:
                         console.log(`Total Failures: ${failuresTable.length}`);
                         console.log(`Memory usaged: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100} MB`);
                         console.info('Execution time (hr): %ds %dms', process.hrtime(hrstart)[0], process.hrtime(hrstart)[1] / 1000000);
+                        const payload = {
+                          owner: context.payload.repository.owner.login,
+                          repo: context.payload.repository.name,
+                          issue_number: context.payload.pull_request.number,
+                          body: `Total Failures: ${failuresTable.length}`
+                        }
+                        github.rest.issues.createComment(payload)
                     });
             })()
-            const payload = {
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
-              issue_number: context.payload.pull_request.number,
-              body: '| 🍎 Fruit | 🍭 Sugar Content (grams) |\n| --- | --- |\n| Apple | 10 |\n| Banana | 14 |\n| Orange | 12 |\n| Pineapple | 16 |\n| Grapes | 16 |'
-            }
-            return github.rest.issues.createComment(payload)
           github-token: ${{ secrets.GITHUB_TOKEN }}
