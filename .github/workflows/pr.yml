@@ -18,7 +18,7 @@ jobs:
               owner: context.payload.repository.owner.login,
               repo: context.payload.repository.name,
               issue_number: context.payload.pull_request.number,
-              body: 'Hello, world!'
+              body: '| 🍎 Fruit | 🍭 Sugar Content (grams) |\n| --- | --- |\n| Apple | 10 |\n| Banana | 14 |\n| Orange | 12 |\n| Pineapple | 16 |\n| Grapes | 16 |'
             }
             return github.issues.createComment(payload)
           github-token: ${{ secrets.GITHUB_TOKEN }}
