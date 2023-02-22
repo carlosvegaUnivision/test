@@ -31,7 +31,7 @@ jobs:
         env:
           POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }}
           ENV_ID: ${{ inputs.environment_id }}
-          BRANCH_NAME: ${{input.branch_name}}
+          BRANCH_NAME: ${{inputs.branch_name}}
         with:
           script: |
             const async = require('async')
