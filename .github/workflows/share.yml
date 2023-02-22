@@ -92,6 +92,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         id: add_comment
       - name: Post Results on github process
-        env:
-          RESULTS: ${{ steps.add-comment.outputs.results }}
-        run: echo $RESULTS >> $GITHUB_STEP_SUMMARY
+        run: echo "${{ steps.add_comment.outputs.results }}" >> $GITHUB_STEP_SUMMARY
