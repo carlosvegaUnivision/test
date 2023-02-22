@@ -87,7 +87,12 @@ jobs:
                           issue_number: context.payload?.pull_request?.number,
                           body
                         }
-                        context.payload?.pull_request?.number ? github.rest.issues.createComment(payload):console.log(`::set-output name=GITHUB_STEP_SUMMARY::${body}`);
+                        context.payload?.pull_request?.number ?? github.rest.issues.createComment(payload);
+                        console.log(`GITHUB_STEP_SUMMARY=${body}`);
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          env:
+          GITHUB_STEP_SUMMARY: ${{ steps.add-comment.outputs.summary }}
+      - name: Post Results on github process
+        run: echo $GITHUB_STEP_SUMMARY
