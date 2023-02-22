@@ -69,8 +69,7 @@ jobs:
                         console.table(failuresTable);
                         const allTests = results.reduce((acc, {run: {stats}}) => acc+stats.assertions.total,0);
                         const executionTime = `${process.hrtime(hrstart)[0]}s ${process.hrtime(hrstart)[1] / 1000000}ms`;
-                        const box = `
-                          **Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n
+                        const box = `**Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n
                           <details>
                               <summary>Click to check "Regresion Test results"</summary>
 
