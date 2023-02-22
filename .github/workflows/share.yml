@@ -34,6 +34,7 @@ jobs:
           POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }}
           ENV_ID: ${{ inputs.environment_id }}
           BRANCH_NAME: ${{inputs.branch_name}}
+          RESULTS: ${{ steps.add-comment.outputs.results }}
         with:
           script: |
             const async = require('async')
@@ -90,8 +91,6 @@ jobs:
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          env:
-            RESULTS: ${{ steps.add-comment.outputs.results }}
         id: add_comment
       - name: Post Results on github process
         run: echo $RESULTS >> $GITHUB_STEP_SUMMARY
