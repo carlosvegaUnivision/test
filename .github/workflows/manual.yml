@@ -17,6 +17,15 @@ on:
         description: 'Message:'
         default: 'chore(release): ...'
         required: true
+      to_env:
+        type: choice
+        required: true
+        description: 'To Env: '
+        default: 'qa'
+        options:
+        - qa
+        - stg
+        - prod
 
 jobs:
   promote:
@@ -38,4 +47,10 @@ jobs:
           git commit --allow-empty --allow-empty-message -m ""
           git tag -a ${{github.event.inputs.to_version}} -m "${{ github.event.inputs.message }}"
           git push origin ${{github.event.inputs.to_version}}
+  ru_regresion:
+    uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
+    with:
+      environment_id: ${{ github.event.inputs.to_env }}
+    secrets:
+      POSTMAN_TOKEN: ${{ secrets.POSTMAN }}
 
