@@ -67,7 +67,7 @@ jobs:
                         const markdownTable = `| ${headers.join(" | ")} |\n|${headers.map(() => "---").join("|")}|\n${rows.map(row => `| ${row.join(" | ")} |`).join("\n")}`;
 
                         console.table(failuresTable);
-                        const allTests = ${results.reduce((acc, {run: {stats}}) => acc+stats.assertions.total,0)};
+                        const allTests = results.reduce((acc, {run: {stats}}) => acc+stats.assertions.total,0);
                         const executionTime = `${process.hrtime(hrstart)[0]}s ${process.hrtime(hrstart)[1] / 1000000}ms`;
                         const payload = {
                           owner: context.payload.repository.owner.login,
