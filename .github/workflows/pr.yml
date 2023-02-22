@@ -9,6 +9,6 @@ jobs:
     uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
     with:
       environment_id: 'dev'
-      branch_name: $GITHUB_HEAD_REF
+      branch_name: 'dsr-1474'
     secrets:
       POSTMAN_TOKEN: ${{ secrets.POSTMAN }}
