@@ -86,10 +86,10 @@ jobs:
                           body
                         }
                         if (context.payload?.pull_request?.number) github.rest.issues.createComment(payload);
-                        console.log(body);
+                        core.setOutput('results', body);
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
         id: add_comment
       - name: Post Results on github process
-        run: echo ${{ steps.add_comment.outputs.summary }} >> $GITHUB_STEP_SUMMARY
+        run: echo ${{ steps.add_comment.outputs.results }} >> $GITHUB_STEP_SUMMARY
