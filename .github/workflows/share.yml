@@ -80,7 +80,7 @@ jobs:
                         const markdownTable = `| ${headers.join(" | ")} |\n|${headers.map(() => "---").join("|")}|\n${rows.map(row => `| ${row.join(" | ")} |`).join("\n")}`;
                         const allTests = results.reduce((acc, {run: {stats}}) => acc+stats.assertions.total,0);
                         const executionTime = `${process.hrtime(hrstart)[0]}s ${process.hrtime(hrstart)[1] / 1000000}ms`;
-                        const box = `**Test Env**: ${process.env.ENV_ID}\n**Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n<details><summary>Click to check "Regresion Test results"</summary>\n\n${markdownTable}</details>`;
+                        const box = `**Test Env**: ${process.env.ENV_ID} ${process.env.BRANCH_NAME?' Dynamic Env:'+process.env.BRANCH_NAME:''}\n**Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n<details><summary>Click to check "Regresion Test results"</summary>\n\n${markdownTable}</details>`;
                         const payload = {
                           owner: context.payload.repository.owner.login,
                           repo: context.payload.repository.name,
