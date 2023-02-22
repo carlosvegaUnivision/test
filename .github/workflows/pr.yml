@@ -8,4 +8,4 @@ jobs:
   ru_regresion:
     uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
     with:
-      caller_id: 'QA input from pr.yml to share.yml'
+      environmentID: 'QA input from pr.yml to share.yml'
