@@ -59,9 +59,14 @@ jobs:
                     (err, results) => {
                         err && console.error(err);
                         const failuresTable = results.reduce((acc, {collection: {name: url}, run: {failures}}) =>
-                            [...acc, ...failures.map(({error: {name, test, message}, source: {name: sourceName}, parent: {name: parentName, items: {members: [{id: linkToTest}]}}})=> ({ref: `${url} | ${parentName}/${sourceName}`, error: `${test} | ${name}: ${message}`.substring(0,90)})) ]
-                            //[...acc, ...failures.map(({error: {name, test, message}, source: {name: sourceName}, parent: {name: parentName, items: {members: [{id: linkToTest}]}}})=> ({ref: `${url}<<${parentName}/${sourceName}>>`, error: `${test} | ${name}: ${message}`.substring(0,90), linkToTest: `https://univisiondescarga.postman.co/workspace/6dfa57f7-e2ac-4aa0-9472-c61df72aa565/request/9766167-${linkToTest}`})) ]
+                          [...acc, ...failures.map(({error: {name, test, message}, source: {name: sourceName}, parent: {name: parentName, items: {members: [{id: linkToTest}]}}})=> ({ref: `${url}<<${parentName}/${sourceName}>>`, error: `${test} | ${name}: ${message}`.substring(0,90), linkToTest: `https://univisiondescarga.postman.co/workspace/6dfa57f7-e2ac-4aa0-9472-c61df72aa565/request/9766167-${linkToTest}`})) ]
+                          //[...acc, ...failures.map(({error: {name, test, message}, source: {name: sourceName}, parent: {name: parentName, items: {members: [{id: linkToTest}]}}})=> ({ref: `${url} | ${parentName}/${sourceName}`, error: `${test} | ${name}: ${message}`.substring(0,90)})) ]
                         , []);
+
+                        const headers = ["Referencia 🍎", "Error 🍭", "Link"];
+                        const rows = failuresTable.map(item => [`**${item.ref}**`, item.error, `[Link](${linkToTest})`]);
+                        const markdown = `| ${headers.join(" | ")} |\n|${headers.map(() => "---").join("|")}|\n${rows.map(row => `| ${row.join(" | ")} |`).join("\n")}`;
+
                         console.table(failuresTable);
                         console.log(`All Tests: ${results.reduce((acc, {run: {stats}}) => acc+stats.assertions.total,0)}`);
                         console.log(`Total Failures: ${failuresTable.length}`);
@@ -71,7 +76,7 @@ jobs:
                           owner: context.payload.repository.owner.login,
                           repo: context.payload.repository.name,
                           issue_number: context.payload.pull_request.number,
-                          body: `Total Failures: ${failuresTable.length}`
+                          body: `Total Failures: ${failuresTable.length}\n ${markdown}`
                         }
                         github.rest.issues.createComment(payload)
                     });
