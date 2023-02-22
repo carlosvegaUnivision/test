@@ -64,7 +64,7 @@ jobs:
                         , []);
 
                         const headers = ["Referencia 🍎", "Error 🍭", "Link"];
-                        const rows = failuresTable.map(item => [`**${item.ref}**`, item.error, `[Link](${linkToTest})`]);
+                        const rows = failuresTable.map(item => [`**${item.ref}**`, item.error, `[Link](${item.linkToTest})`]);
                         const markdown = `| ${headers.join(" | ")} |\n|${headers.map(() => "---").join("|")}|\n${rows.map(row => `| ${row.join(" | ")} |`).join("\n")}`;
 
                         console.table(failuresTable);
