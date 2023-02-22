@@ -47,6 +47,7 @@ jobs:
           git commit --allow-empty --allow-empty-message -m ""
           git tag -a ${{github.event.inputs.to_version}} -m "${{ github.event.inputs.message }}"
           git push origin ${{github.event.inputs.to_version}}
+          echo ${{ github.event.inputs.to_env }}
   ru_regresion:
     uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
     with:
