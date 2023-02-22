@@ -7,7 +7,9 @@ on:
         default: "default"
         required: false
         type: string
-
+    secrets:
+      POSTMAN_TOKEN:
+        required: true
 jobs:
   add-comment:
     runs-on: ubuntu-latest
@@ -25,7 +27,7 @@ jobs:
       - name: Add comment
         uses: actions/github-script@v6
         env:
-          POSTMAN: ${{ secrets.POSTMAN }}
+          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }}
         with:
           script: |
             const async = require('async')
@@ -34,7 +36,7 @@ jobs:
 
             const request = axios.create({
                 headers: {
-                  'X-Api-Key' : process.env.POSTMAN,
+                  'X-Api-Key' : process.env.POSTMAN_TOKEN,
                   'Content-Type': 'application/json'
                   }
                 }

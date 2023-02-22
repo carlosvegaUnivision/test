@@ -9,3 +9,5 @@ jobs:
     uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
     with:
       environmentID: 'QA input from pr.yml to share.yml'
+    secrets:
+      POSTMAN_TOKEN: ${{ secrets.POSTMAN }}
