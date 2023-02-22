@@ -69,11 +69,23 @@ jobs:
                         console.table(failuresTable);
                         const allTests = results.reduce((acc, {run: {stats}}) => acc+stats.assertions.total,0);
                         const executionTime = `${process.hrtime(hrstart)[0]}s ${process.hrtime(hrstart)[1] / 1000000}ms`;
+                        const box = `
+                          **Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n
+                          <details>
+                              <summary>Click to check "Regresion Test results"</summary>
+
+                              ${markdownTable}
+                              ```js
+                              function logSomething(something) {
+                                console.log('Something', something);
+                              }
+                              ```
+                            </details>`;
                         const payload = {
                           owner: context.payload.repository.owner.login,
                           repo: context.payload.repository.name,
                           issue_number: context.payload.pull_request.number,
-                          body: `**Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n ${markdownTable}`
+                          body: box
                         }
                         github.rest.issues.createComment(payload)
                     });
