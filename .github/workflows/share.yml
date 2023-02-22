@@ -65,10 +65,6 @@ jobs:
                     prerequest.script.exec = [...globalExec, ...globalTest,...prerequest.script.exec];
                     return ((done)=>newman.run({collection:{...collection, ...{event: [prerequest, test]}}, environment, reporters: 'cli', silent: true}, done));
                 });
-
-                console.log('Running these Collections in Parallel Process:');
-                console.table(collectionItems.map(({name: api})=> ({api})));
-
                 async.parallel(
                     commands,
                     (err, results) => {
@@ -90,11 +86,10 @@ jobs:
                           body
                         }
                         if (context.payload?.pull_request?.number) github.rest.issues.createComment(payload);
-                        echo "GITHUB_STEP_SUMMARY=${body}" >> $GITHUB_ENV
+                        console.log(body);
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          shell: bash
+        id: add_comment
       - name: Post Results on github process
-        run: echo $GITHUB_STEP_SUMMARY
-        shell: bash
+        run: echo ${{ steps.add_comment.outputs.summary }} >> $GITHUB_STEP_SUMMARY
