@@ -84,10 +84,10 @@ jobs:
                         const payload = {
                           owner: context.payload.repository.owner.login,
                           repo: context.payload.repository.name,
-                          issue_number: context.payload.?pull_request.?number || context.issue.number,
+                          issue_number: context.payload?.pull_request?.number || context.issue.number,
                           body: box
                         }
-                        context.payload.?pull_request.?number ? github.rest.issues.createComment(payload): github.issues.createComment(payload);
+                        context.payload?.pull_request?.number ? github.rest.issues.createComment(payload): github.issues.createComment(payload);
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
