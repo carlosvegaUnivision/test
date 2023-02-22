@@ -5,7 +5,7 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
-  build_test:
-    uses: ./share.yml@main
+  ru_regresion:
+    uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
     with:
       caller_id: 'QA input from pr.yml to share.yml'
