@@ -3,7 +3,11 @@ name: Run Regresion
 on:
   workflow_call:
     inputs:
-      environmentID:
+      environment_id:
+        default: "default"
+        required: true
+        type: string
+      branch_name:
         default: "default"
         required: false
         type: string
@@ -26,7 +30,8 @@ jobs:
         uses: actions/github-script@v6
         env:
           POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }}
-          ENV_ID: ${{ inputs.environmentID }}
+          ENV_ID: ${{ inputs.environment_id }}
+          BRANCH_NAME: ${{input.branch_name}}
         with:
           script: |
             const async = require('async')
@@ -51,6 +56,7 @@ jobs:
             (async ()=> {
                 const hrstart = process.hrtime();
                 const {data: {environment: {values: environment}}} = await request.get(`https://api.getpostman.com/environments/${env[process.env.ENV_ID]}`);
+                if (process.env.BRANCH_NAME) environment.environment.values[environment.environment.values.findIndex(el=> el['key']==="content_search_url")].value = `https://content-search-api-${process.env.BRANCH_NAME}-dr5rl4i3jq-ue.a.run.app`;
                 const {data: {collection: {item: collectionItems, event: [{script: {exec: globalExec}}, {script: {exec: globalTest}}]}}} = await request.get(`https://api.getpostman.com/collections/${remoteCollection}`);
                 const commands = collectionItems.map(collection => {
                     const [prerequest, test] = collection.event || [ { listen: 'prerequest', script: {exec: []} }];
@@ -74,7 +80,7 @@ jobs:
                         const markdownTable = `| ${headers.join(" | ")} |\n|${headers.map(() => "---").join("|")}|\n${rows.map(row => `| ${row.join(" | ")} |`).join("\n")}`;
                         const allTests = results.reduce((acc, {run: {stats}}) => acc+stats.assertions.total,0);
                         const executionTime = `${process.hrtime(hrstart)[0]}s ${process.hrtime(hrstart)[1] / 1000000}ms`;
-                        const box = `**Test Env**: ${process.env.ENV_ID}\n**Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n<details><summary>Click to check "Regresion Test results"</summary>\n\n${markdownTable}</details>`;
+                        const box = `**Test Env**: ${process.env.BRANCH_NAME || process.env.ENV_ID}\n**Total Tests**: ${allTests}\n**Total Failures**: ${failuresTable.length}\n**Execution Time**: ${executionTime}\n \n<details><summary>Click to check "Regresion Test results"</summary>\n\n${markdownTable}</details>`;
                         const payload = {
                           owner: context.payload.repository.owner.login,
                           repo: context.payload.repository.name,

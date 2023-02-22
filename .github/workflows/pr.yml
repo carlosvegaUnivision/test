@@ -8,6 +8,7 @@ jobs:
   ru_regresion:
     uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
     with:
-      environmentID: 'dev'
+      environment_id: 'dev'
+      branch_name: $GITHUB_HEAD_REF
     secrets:
       POSTMAN_TOKEN: ${{ secrets.POSTMAN }}
