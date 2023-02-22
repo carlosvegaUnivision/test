@@ -88,7 +88,7 @@ jobs:
                           body
                         }
                         if (context.payload?.pull_request?.number) github.rest.issues.createComment(payload);
-                        console.log(${body});
+                        console.log(body);
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
