@@ -8,6 +8,6 @@ jobs:
   ru_regresion:
     uses: carlosvegaUnivision/test/.github/workflows/share.yml@main
     with:
-      environmentID: 'QA input from pr.yml to share.yml'
+      environmentID: 'dev'
     secrets:
       POSTMAN_TOKEN: ${{ secrets.POSTMAN }}
