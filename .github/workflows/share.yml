@@ -56,7 +56,7 @@ jobs:
             (async ()=> {
                 const hrstart = process.hrtime();
                 const {data: {environment: {values: environment}}} = await request.get(`https://api.getpostman.com/environments/${env[process.env.ENV_ID]}`);
-                if (process.env.BRANCH_NAME) environment.environment.values[environment.environment.values.findIndex(el=> el['key']==="content_search_url")].value = `https://content-search-api-${process.env.BRANCH_NAME}-dr5rl4i3jq-ue.a.run.app`;
+                if (process.env.BRANCH_NAME) environment[environment.findIndex(el=> el['key']==="content_search_url")].value = `https://content-search-api-${process.env.BRANCH_NAME}-dr5rl4i3jq-ue.a.run.app`;
                 const {data: {collection: {item: collectionItems, event: [{script: {exec: globalExec}}, {script: {exec: globalTest}}]}}} = await request.get(`https://api.getpostman.com/collections/${remoteCollection}`);
                 const commands = collectionItems.map(collection => {
                     const [prerequest, test] = collection.event || [ { listen: 'prerequest', script: {exec: []} }];
