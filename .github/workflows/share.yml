@@ -14,6 +14,8 @@ on:
     secrets:
       POSTMAN_TOKEN:
         required: true
+env:
+  GITHUB_ENV: env.txt
 jobs:
   add-comment:
     runs-on: ubuntu-latest
@@ -88,13 +90,11 @@ jobs:
                           body
                         }
                         if (context.payload?.pull_request?.number) github.rest.issues.createComment(payload);
-                        console.log(body);
-                        console.log(`GITHUB_STEP_SUMMARY=${body}`); // Set environment variable
-                        console.log(`::set-env name=GITHUB_STEP_SUMMARY::${body}`); // Deprecated syntax for compatibility
+                        echo "GITHUB_STEP_SUMMARY=${body}" >> $GITHUB_ENV
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          env:
-          GITHUB_STEP_SUMMARY: ${{ steps.add-comment.outputs.summary }}
+          shell: bash
       - name: Post Results on github process
-        run: echo $GITHUB_STEP_SUMMARY >> $GITHUB_STEP_SUMMARY
+        run: echo $GITHUB_STEP_SUMMARY
+        shell: bash
