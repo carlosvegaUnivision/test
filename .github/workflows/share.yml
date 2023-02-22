@@ -87,7 +87,7 @@ jobs:
                           issue_number: context.payload?.pull_request?.number,
                           body
                         }
-                        context.payload?.pull_request?.number ? github.rest.issues.createComment(payload):console.log(`::set-env name=GITHUB_STEP_SUMMARY::${body}`);;
+                        context.payload?.pull_request?.number ? github.rest.issues.createComment(payload):console.log(`::set-output name=GITHUB_STEP_SUMMARY::${body}`);
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
