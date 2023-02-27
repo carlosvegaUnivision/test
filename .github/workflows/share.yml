@@ -86,7 +86,7 @@ jobs:
                           body
                         }
                         if (context.payload?.pull_request?.number) github.rest.issues.createComment(payload);
-                        core.setOutput('results', body.replace(/^\s+|\s+$/g, ''));
+                        core.setOutput('results', body.replace(/^\s+|\s+$/g, '').replace(/`/g, ""));
                     });
             })()
           github-token: ${{ secrets.GITHUB_TOKEN }}
